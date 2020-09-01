@@ -10,6 +10,7 @@ const app = express();
 // Passport Config
 require('./config/passport')(passport);
 
+/*
 // DB Config
 const db = require('./config/keys').mongoURI;
 
@@ -21,6 +22,15 @@ mongoose
   )
   .then(() => console.log('MongoDB Connected'))
   .catch(err => console.log(err));
+
+*/
+//const url = config.mongoUrl;
+const url = require('./config/keys').mongoUrl; 
+const connect = mongoose.connect(url, {useNewUrlParser: true, useUnifiedTopology: true});
+
+connect.then((dbusers) => {
+    console.log("Connected correctly to server");
+}, (err) => { console.log(err); });
 
 // EJS
 app.use(expressLayouts);
